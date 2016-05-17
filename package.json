@@ -1,0 +1,23 @@
+{
+  "name": "skyport",
+  "version": "1.0.0",
+  "description": "Provide offline functionality for your web app",
+  "main": "skyport.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/MJB-code6/SkyPort.git"
+  },
+  "keywords": [
+    "offline",
+    "service worker",
+  ],
+  "author": "Brandon Mizuno, Masha Diminsky, Joe Huang",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/MJB-code6/SkyPort/issues"
+  },
+  "homepage": "https://github.com/MJB-code6/SkyPort#readme"
+}
