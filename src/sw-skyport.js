@@ -16,14 +16,32 @@ self.addEventListener('activate', function(event) {
 
 self.addEventListener('fetch', function(event) {
   event.respondWith(
-       caches.match(event.request)
-         .then(function(response) {
-           return online ? fetch(event.request) : response;
-         }).catch(function(event){
-           return;
-         })
-    )
-  });
+    caches.open('precache').then(function(cache) {
+      cache.match(event.request).then(function(response) {
+        if (response) return response;
+        return fetch(event.request).then(function(response) {
+          return response;
+        }).catch(function() {
+          caches.open('fallback').then(function(cache) {
+            cache.match(event.request).then(function(response) {
+              return response;
+            });
+          });
+        });
+      });
+    })
+
+  )
+});
+  // event.respondWith(
+  //      caches.match(event.request)
+  //        .then(function(response) {
+  //          return online ? fetch(event.request) : response;
+  //        }).catch(function(event){
+  //          return;
+  //        })
+  //   )
+  // });
 
 self.addEventListener('message', function(event) {
 
