@@ -15,8 +15,9 @@ Service Workers are still a new and experimental technology, setup is long and t
 
 # Getting Started
 
-1. Fork and clone this repo.
-2. Apply these methods.
+1. Download skyport.js file and include in your app's client folder.
+2. Add a script tag to your html files linking to skyport.js.
+3. Apply the Skyport methods below.
 
 ## skyport.cache(*jsonFile*)
 
