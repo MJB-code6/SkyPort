@@ -12,7 +12,8 @@
   },
   "keywords": [
     "offline",
-    "service worker"
+    "service worker",
+    "progressive"
   ],
   "author": "Brandon Mizuno, Masha Diminsky, Joe Huang",
   "license": "ISC",
