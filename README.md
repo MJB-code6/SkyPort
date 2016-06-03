@@ -29,7 +29,7 @@ Service Workers are still a new and experimental technology, setup is long and t
  2. Reduce network requests, optimize your app's web performance.
  3. Better user experience—users unlikely to notice your app is offline.  
  4. Fallback page automatically served when user is offline and the requested assets not found in the cache.
- 5. For static file updates:
+ 5. For static file updates: 
   + The version number can be set to anything(doesn't have to be a number) as long as there is a clear distinction.
 + When version number changes, the changed file(s) is served once from the server, then saved inside of cache—so any future requests with the same version number will be served from the cache.
 
@@ -39,9 +39,9 @@ skyport.static('/assetList.json');
 ```    
 
  *assetList.json:*  
-
+ 
  + In this example, the static cache, the dynamic cache and the fallback page are all included in the JSON file—include only what you are using. **For example if you are only static assets, include the version number and the static property with the list of assets you want to store in the static cache.
-
+ 
 ```javascript
 {
   version: 1,
@@ -60,7 +60,7 @@ skyport.static('/assetList.json');
   ],
   fallback: '/fallback.html'
 }
- ```
+ ``` 
 
 ## skyport.static(*jsonFile* / *versionNum*, [*files*] )
 > *Include in file that you won’t cache, like index.html.*
@@ -91,7 +91,7 @@ skyport.static(1, [
 skyport.static('/assetList.json');
 ```            
 
-*assetList.json:*
+*assetList.json:* 
 
  + only static files will be cached, the rest is ignored.
  + JSON file should have 'version' and 'static'(array) properties.
@@ -114,7 +114,7 @@ skyport.static('/assetList.json');
   ],
   fallback: '/fallback.html'
 }
- ```
+ ``` 
 
 ## skyport.dynamic(*jsonFile* / [*files*])
 
@@ -132,7 +132,7 @@ skyport.dynamic(['/messages','/dynamicData.html',]);
 skyport.dynamic('/assetList.json');
 ```            
 
-*assetList.json:*
+*assetList.json:* 
 
  + only dynamic files will be cached, the rest is ignored.
  + JSON file should have 'dynamic'(array) property to work.
@@ -155,7 +155,7 @@ skyport.dynamic('/assetList.json');
   ],
   fallback: '/fallback.html'
 }
- ```
+ ``` 
 
 ## skyport.direct(*data, callback*)
 
@@ -171,7 +171,7 @@ function sendMessage() {
   var msgObj = {};
   msgObj.message = msg;
   msgObj.author = user;
-
+	
   skyport.direct(function() {
     $.ajax({
     type: POST,
@@ -191,7 +191,7 @@ function sendMessage() {
 #####Benefits:
 1. When user is offline and assets they request are not in cache, custom fallback page will be served.
 2. Create a simple fallback page for users to see when your web app is offline.
-
+ 
 ```javascript
 skyport.fallback('/fallbackPage.html');
 ```  
@@ -215,4 +215,4 @@ skyport.reset('sw') // deletes current Service Worker
 ### License
 MIT License (MIT)
 
-Copyright (c) Team SkyPort (Brandon, Masha, Joe)
+Copyright (c) 2016 Team SkyPort ([Brandon](https://github.com/ranmizu), [Masha](https://github.com/Mashadim), [Joe](https://github.com/ZhouxiangHuang))
