@@ -35,7 +35,7 @@ Service Workers are still a new and experimental technology, setup is long and t
 
 *index.html:*  
 ```javascript
-skyport.static('/assetList.json');
+skyport.cache('/assetList.json');
 ```    
 
  *assetList.json:*  
