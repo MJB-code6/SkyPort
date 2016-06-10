@@ -21,7 +21,7 @@ Service Workers are still a new and experimental technology, setup is long and t
 
 ## skyport.cache(*jsonFile*)
 
-> *Include in file that you won’t cache, like index.html.*
+> *Include in a script tag on your homepage, or call from a file that you won’t cache.*
 
 #####Benefits:
 
@@ -30,8 +30,9 @@ Service Workers are still a new and experimental technology, setup is long and t
  3. Better user experience—users unlikely to notice your app is offline.  
  4. Fallback page automatically served when user is offline and the requested assets not found in the cache.
  5. For static file updates:
-  + The version number can be set to anything(doesn't have to be a number) as long as there is a clear distinction.
-+ When version number changes, the changed file(s) is served once from the server, then saved inside of cache—so any future requests with the same version number will be served from the cache.
+  + The version number can be set to a number or a string.
+  + Change the version number whenever the contents of a previously cached asset change but the name does not (e.g. updates to code in 'app.js')
+  + No need to update version if you are adding new assets or deleting previous assets.
 
 *index.html:*  
 ```javascript
