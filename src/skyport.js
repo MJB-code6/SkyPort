@@ -16,7 +16,6 @@ if (!window) {
     return cache;
   });
 
-  var cacheOpen;
   var fallbackURL = registration.scope;
 
   //skipWaiting within install listenner allows waiting service worker become active
@@ -46,12 +45,12 @@ if (!window) {
               return postcache.match(event.request).then(function(response) {
                 //if the request is dynamic data, update cache
                 if (response && event.request.method === 'GET') {
-                  postcache.put(event.request, netRes.clone())
+                  postcache.put(event.request, netRes.clone());
                 }
                 //send response from the network to the client
                 return netRes;
-              })
-          })
+              });
+          });
         } else {
             //if there is no network connection AND requested data is not
             //found in static cache, serve data from dynamic cache
@@ -61,16 +60,16 @@ if (!window) {
                 //if no match found from dynamic, serve the fallback page
                 return fallback.match(fallbackURL).then(function(response) {
                   return response;
-                })
+                });
               }
               else {
                 console.error('(SkyPort) Error: a resource ', event.request.url,
                   ' was not found in cache');
               }
-            })
+            });
         }
       })
-    )
+    );
   });
 
 
@@ -80,7 +79,7 @@ if (!window) {
 
     if (command === "cacheJSON" && navigator.onLine) {
       return fetch(info.fileRoute).then(function(response) {
-        return response.json()
+        return response.json();
       })
       .then(function(parsedFile) {
         if (info.cacheType === 'cache') {
@@ -114,9 +113,11 @@ if (!window) {
           }
 
           if (parsedFile.fallback) {
-            fallbackURL += parsedFile.fallback.slice(parsedFile.fallback.indexOf(
-              parsedFile.fallback.match(/\w/)));
-            addToCache('fallback', [parsedFile.fallback]);
+            if (!/\.html$/.test(fallbackURL)) {
+              fallbackURL += parsedFile.fallback.slice(parsedFile.fallback.indexOf(
+                parsedFile.fallback.match(/\w/)));
+              addToCache('fallback', [parsedFile.fallback]);
+            }
           }
         }
 
@@ -170,7 +171,7 @@ if (!window) {
   	if(command === "fallback") {
       fallbackURL += info.fileRoute.slice(info.fileRoute.indexOf(
         info.fileRoute.match(/\w/)));
-      addToCache('fallback', [info.fileRoute])
+      addToCache('fallback', [info.fileRoute]);
   	}
 
     if (command === "queue") {
@@ -199,7 +200,7 @@ if (!window) {
 
         retrieveRequest.onsuccess = function(e) {
           // Get the old value that we want to update
-          var deferredQueue = retrieveRequest.result["requests"];
+          var deferredQueue = retrieveRequest.result.requests;
 
           // update the value(s) in the object that you want to change
           deferredQueue.push({
@@ -241,7 +242,7 @@ if (!window) {
             if (!response) cache.add(item);
           })
         })
-        cleanCache(itemsToAdd);
+        //cleanCache(itemsToAdd);
       }
       else {
         if (type === 'dynamic') postcache = cache;
@@ -250,10 +251,6 @@ if (!window) {
         });
       }
     });
-  }
-
-  function fetchFromCache(cacheName, request) {
-
   }
 
   function cleanCache(newItems) {
@@ -296,12 +293,6 @@ if (window) {
         skyport.dynamic(['/skyport.js']);
       });
     }
-
-    // Used to control caching order
-    var staticStatus = false;
-    var dynamicSatus = false;
-    var staticData;
-    var dynamicData;
 
     //  Make useful functions available on the window object
     window.skyport =  window.skyport || {
@@ -523,5 +514,5 @@ if (window) {
         }
       }
     }
-  })();;
+  })();
 }
