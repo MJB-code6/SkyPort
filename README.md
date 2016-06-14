@@ -33,6 +33,7 @@ Service Workers are still a new and experimental technology, setup is long and t
   + The version number can be set to a number or a string.
   + Change the version number anytime you change the contents of the cache
 
+
 *index.html:*  
 ```javascript
 skyport.cache('/assetList.json');
