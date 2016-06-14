@@ -31,12 +31,11 @@ Service Workers are still a new and experimental technology, setup is long and t
  4. Fallback page automatically served when user is offline and the requested assets not found in the cache.
  5. For static file updates:
   + The version number can be set to a number or a string.
-  + Change the version number whenever the contents of a previously cached asset change but the name does not (e.g. updates to code in 'app.js')
-  + No need to update version if you are adding new assets or deleting previous assets.
+  + Change the version number anytime you change the contents of the cache
 
 *index.html:*  
 ```javascript
-skyport.static('/assetList.json');
+skyport.cache('/assetList.json');
 ```    
 
  *assetList.json:*  
@@ -216,4 +215,4 @@ skyport.reset('sw') // deletes current Service Worker
 ### License
 MIT License (MIT)
 
-Copyright (c) Team SkyPort (Brandon, Masha, Joe)
+Copyright (c) 2016 Team SkyPort ([Brandon](https://github.com/ranmizu), [Masha](https://github.com/Mashadim), [Joe](https://github.com/ZhouxiangHuang))
